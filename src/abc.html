@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<!--<LINK REL = Stylesheet TYPE ="text/css" HREF ="btn.css">-->
+<title>ToDoMain</title>
+<head> <h2>To-do List</h2></head><style>
+#backimg
+{
+background: rgba(0, 0, 0, 0) url("notebook.jpg") no-repeat scroll 0 0 / 100% 100%;
+    height: 740px;
+    width: 740px;
+
+
+}
+.container
+{
+
+	 border: 2px solid;
+    float: left;
+    height: 800px;
+    left: 50px;
+    top: 50px;
+    width: 756px;
+
+	
+}
+#t1
+{
+  border: 2px solid;
+    height: 589px;
+    left: 147px;
+    position: relative;
+    top: -692px;
+    width: 460px;
+    z-index: 3;
+
+
+
+}
+
+
+</style>
+<body>
+<div class = "container">
+<input type="image" src="plus_sign.png" onclick="addRow('dataTable')" style="
+ 
+
+ float: right;
+    height: 64px;
+    position: relative;
+    right: 530px;
+    top: 641px;
+    width: 64px;
+    z-index: 1;"
+  />
+  
+  <input type="image" src="button_cancel.png" onclick="deleteRow('dataTable')" style="
+ 
+
+      float: right;
+    height: 50px;
+    position: relative;
+    right: 90px;
+    top: 650px;
+    width: 50px;
+    z-index: 1;"/>
+  
+  
+  <div id = "backimg" ></div>
+  
+
+<div id = "t1">
+
+<TABLE id="dataTable">
+        <TR>
+            <TD><input type="checkbox" style="   height: 17px;
+    left: 160px;
+    position: relative;
+    top: -689px;
+    width: 50px;
+    z-index: 5;" name="chk"></TD>
+        <TD>  <input type="textarea" name="txt" size="60px" style="z-index: 5; position: relative; left: 180px; width: 300px; top: -689px; height: 20px;"></TD>
+            
+        </TR>
+    </TABLE>
+	</div>
+	</div>
+</body>
+<SCRIPT language="javascript">
+        function addRow(tableID) {
+ 
+            var table = document.getElementById(tableID);
+ 
+            var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+ 
+            var colCount = table.rows[0].cells.length;
+ 
+            for(var i=0; i<colCount; i++) {
+ 
+                var newcell = row.insertCell(i);
+ 
+                newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+                //alert(newcell.childNodes);
+                switch(newcell.childNodes[0].type) {
+                    case "text":
+                            newcell.childNodes[0].value = "";
+                            break;
+                    case "checkbox":
+                            newcell.childNodes[0].checked = false;
+                            break;
+                    case "select-one":
+                            newcell.childNodes[0].selectedIndex = 0;
+                            break;
+                }
+            }
+        }
+ 
+        function deleteRow(tableID) {
+            try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+ 
+            for(var i=0; i<rowCount; i++) {
+                var row = table.rows[i];
+                var chkbox = row.cells[0].childNodes[0];
+                if(null != chkbox && true == chkbox.checked) {
+                    if(rowCount <= 1) {
+                        alert("Cannot delete all the rows.");
+                        break;
+                    }
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+ 
+ 
+            }
+            }catch(e) {
+                alert(e);
+            }
+        }
+ 
+    </SCRIPT>
+
+
+</html>
